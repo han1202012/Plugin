@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
                 getClassLoader().getParent());
         Log.i(TAG, "getClassLoader().getParent().getParent() : " +
                 getClassLoader().getParent().getParent());
+
+    }
+
+    public void onClick(View view) {
 
     }
 }
