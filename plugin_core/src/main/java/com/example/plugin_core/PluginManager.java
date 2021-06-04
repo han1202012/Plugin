@@ -112,4 +112,11 @@ public class PluginManager {
         }
     }
 
+    /**
+     * 获取类加载器
+     * @return
+     */
+    public DexClassLoader getmDexClassLoader() {
+        return mDexClassLoader;
+    }
 }

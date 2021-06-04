@@ -2,9 +2,13 @@ package kim.hsl.plugin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import com.example.plugin_core.PluginManager;
+import com.example.plugin_core.ProxyActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-
+        // 跳转到 plugin_core 模块的代理 Activity
+        Intent intent = new Intent(this, ProxyActivity.class);
+        startActivity(intent);
     }
+
 }
