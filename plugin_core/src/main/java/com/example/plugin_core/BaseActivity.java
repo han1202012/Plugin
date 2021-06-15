@@ -32,7 +32,7 @@ public class BaseActivity extends AppCompatActivity implements PluginActivityInt
     @Override
     public void setContentView(int layoutResID) {
         // 调用代理 Activity 中的 setContentView 方法
-        if (proxyActivity == null) {
+        if (proxyActivity != null) {
             proxyActivity.setContentView(layoutResID);
         }else{
             super.setContentView(layoutResID);

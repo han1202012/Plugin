@@ -1,5 +1,4 @@
 include ':plugin'
 include ':app'
-include ':standard'
 rootProject.name = "Plugin"
 include ':plugin_core'

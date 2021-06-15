@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MotionEvent;
 
@@ -28,6 +29,9 @@ public class ProxyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proxy);
+
+        // 要代理的目标组件的全类名
+        className = getIntent().getStringExtra("CLASS_NAME");
 
         // 注意此处的 ClassLoader 类加载器必须是插件管理器中的类加载器
         try {
@@ -109,8 +113,21 @@ public class ProxyActivity extends AppCompatActivity {
         pluginActivity.onBackPressed();
     }
 
+    /**
+     * 需要使用插件包加载的类加载器
+     * @return
+     */
     @Override
     public ClassLoader getClassLoader() {
         return PluginManager.getInstance().getmDexClassLoader();
+    }
+
+    /**
+     * 需要使用插件包中加载的资源
+     * @return
+     */
+    @Override
+    public Resources getResources() {
+        return PluginManager.getInstance().getmResources();
     }
 }

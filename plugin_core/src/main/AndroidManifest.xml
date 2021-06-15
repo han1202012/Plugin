@@ -3,7 +3,9 @@
     package="com.example.plugin_core">
 
     <application>
-        <activity android:name=".ProxyActivity"></activity>
+        <activity
+            android:name=".ProxyActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

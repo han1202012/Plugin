@@ -2,6 +2,7 @@ package com.example.plugin_core;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 
@@ -67,7 +68,7 @@ public class PluginManager {
 
         // DexClassLoader 的 optimizedDirectory 操作目录必须是私有的
         // ( 模式必须是 Context.MODE_PRIVATE )
-        File optimizedDirectory = context.getDir("plugin", Context.MODE_PRIVATE);
+        File optimizedDirectory = context.getDir("cache_plugin", Context.MODE_PRIVATE);
 
         // 创建 DexClassLoader
         mDexClassLoader = new DexClassLoader(
@@ -85,7 +86,7 @@ public class PluginManager {
             // 通过反射获取 AssetManager 中的 addAssetPath 隐藏方法
             Method addAssetPathMethod = assetManager.
                     getClass().
-                    getDeclaredMethod("addAssetPath");
+                    getDeclaredMethod("addAssetPath", String.class);
 
             // 调用反射方法
             addAssetPathMethod.invoke(assetManager, loadPath);
@@ -96,6 +97,11 @@ public class PluginManager {
                     context.getResources().getDisplayMetrics(),
                     context.getResources().getConfiguration()
             );
+
+            // 获取插件包中的 Activity 类信息
+            mPackageInfo = context.getPackageManager().getPackageArchiveInfo(
+                    loadPath, // 加载的插件包路径
+                    PackageManager.GET_ACTIVITIES); // 获取的包信息类名
 
         } catch (IllegalAccessException e) {
             // 调用 AssetManager.class.newInstance() 反射构造方法异常
@@ -118,5 +124,21 @@ public class PluginManager {
      */
     public DexClassLoader getmDexClassLoader() {
         return mDexClassLoader;
+    }
+
+    /**
+     * 获取插件包中的 Package 信息
+     * @return
+     */
+    public PackageInfo getmPackageInfo() {
+        return mPackageInfo;
+    }
+
+    /**
+     * 获取插件包中的资源
+     * @return
+     */
+    public Resources getmResources() {
+        return mResources;
     }
 }
