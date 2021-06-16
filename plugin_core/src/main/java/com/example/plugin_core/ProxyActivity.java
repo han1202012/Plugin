@@ -101,11 +101,11 @@ public class ProxyActivity extends AppCompatActivity {
         pluginActivity.onSaveInstanceState(outState);
     }
 
-    @Override
+    /*@Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
         return pluginActivity.onTouchEvent(event);
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
